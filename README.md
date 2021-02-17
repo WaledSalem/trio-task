@@ -1,10 +1,8 @@
 # Trio-task
 
-This exercise gets you to run a Flask application container, a MySQL container and an NGINX container in a network.
-
-* Containerise the MySQL database and the Flask application in this repository
-    - You will have to write the Dockerfile to build the images - a Dockerfile template has been provided for both images.
-    - Look up the MySQL 5.7 image documentation on Docker Hub to learn how to configure the database.
-* Create a network and connect the Flask application container, database container and an NGINX container to it.
-    - Remember to bind mount the nginx.conf file as shown in the tutorial above
-* Navigate to your application either through your browser or on the command line with curl localhost.
+- Clone down this repository.
+- Containerise the Flask application in the flask-app directory.
+- Bind mount the nginx.conf file onto the NGINX container and run the NGINX container and the Flask app together.
+- Use a bind mount to mount the SQL dump file CreateTable.sql in the directory db onto the MySQL 5.7 container (details on where it should be mounted can be found in the Dockerfile)
+- Run curl localhost or navigate to your machine's network location in your browser.
+- Remember that your containers will have to be on the same network.
