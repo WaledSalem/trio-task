@@ -1,0 +1,38 @@
+version: '3.7'
+services:
+  mysql:
+    build: ./db
+    image: db
+    ports:
+    - target: 3306
+      published: 3306
+      protocol: tcp
+    volumes:
+    - type: volume
+      source: mydata
+      target: /var/lib/mysql
+    environment: 
+      MYSQL_ROOT_PASSWORD: root 
+  flask-app:
+    build: ./flask-app
+    image: flaskapp
+    ports:
+    - target: 5000
+      published: 5000
+      protocol: tcp
+    depends_on:
+    - "mysql"
+  nginx:
+    image: nginx:alpine
+    ports:
+    - target: 80
+      published: 80
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: ./nginx/nginx.conf
+      target: /etc/nginx/nginx.conf
+    depends_on:
+    - "flask-app"
+volumes:
+  mydata:
